@@ -29,6 +29,7 @@ func _physics_process(delta: float) -> void:
 func _handle_collision() -> void:
 	var collision := get_last_slide_collision() ## 衝突した当たり判定そのもの
 	var collider := collision.get_collider() ## 衝突した当たり判定を持つ親ノード
+	add_collision_exception_with(collider) # 一度衝突した相手は無視する
 	
 	if collider is Player:
 		collider.take_damage(damage, false)
@@ -36,4 +37,7 @@ func _handle_collision() -> void:
 	elif collider is CharacterBase:
 		collider.take_damage(damage)
 	
-	queue_free()
+	if penetration_count == 0:
+		queue_free()
+	else:
+		penetration_count -= 1

@@ -46,7 +46,7 @@ shape = SubResource("CircleShape2D_qdvth")
 [node name="Color" type="AnimatedSprite2D" parent="."]
 modulate = Color(0, 1, 1, 1)
 sprite_frames = SubResource("SpriteFrames_0cgdj")
-frame_progress = 0.317422
+frame_progress = 0.389225
 
 [node name="Base" type="Sprite2D" parent="."]
 texture = ExtResource("3_bgqjf")

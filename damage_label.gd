@@ -27,5 +27,4 @@ func _ready() -> void:
 	tween.parallel().tween_property(self, "count", amount, 0.2)
 	tween.tween_interval(0.6)
 	tween.tween_property(self, "modulate:a", 0, 0.2)
-	
 	tween.tween_callback(queue_free)
