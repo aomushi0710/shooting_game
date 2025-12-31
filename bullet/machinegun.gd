@@ -19,7 +19,7 @@ func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 	
-	velocity = Vector2.RIGHT * bullet_speed * BULLET_SPEED_SCALE
+	velocity = base_direction * bullet_speed * BULLET_SPEED_SCALE
 	
 	if move_and_slide():
 		_handle_collision()
@@ -31,10 +31,10 @@ func _handle_collision() -> void:
 	var collider := collision.get_collider() ## 衝突した当たり判定を持つ親ノード
 	add_collision_exception_with(collider) # 一度衝突した相手は無視する
 	
-	if collider is Player:
+	if collider.get_collision_layer_value(Global.Layer.PLAYER):
 		collider.take_damage(damage, false)
 	
-	elif collider is CharacterBase:
+	elif collider.get_collision_layer_value(Global.Layer.ENEMY):
 		collider.take_damage(damage)
 	
 	if penetration_count == 0:

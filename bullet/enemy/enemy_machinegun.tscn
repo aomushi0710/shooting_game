@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcf6cqourjx3i"]
+
+[ext_resource type="Script" uid="uid://dne3lbdveo3f1" path="res://bullet/enemy/enemy_machinegun.gd" id="1_874im"]
+[ext_resource type="PackedScene" uid="uid://d3sse6ayqeywm" path="res://bullet/machinegun.tscn" id="1_b2ui8"]
+
+[node name="machinegun" instance=ExtResource("1_b2ui8")]
+rotation = 3.14159
+script = ExtResource("1_874im")
+bullet_color = Color(1, 0, 0, 1)
+
+[node name="Color" parent="." index="1"]
+modulate = Color(1, 0, 0, 1)
+frame_progress = 0.815173

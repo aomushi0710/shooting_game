@@ -12,7 +12,7 @@ signal value_changed(param: BulletParameter)
 const PASSWORD = "doichulab"
 
 ## 内部で対応する変数を一意に識別するためのid。
-@export var id: Bullet.ParamID = Bullet.ParamID.NONE
+@export var id: ParamID.ID = ParamID.ID.NONE
 
 ## プレイヤーが編集可能な変数名。
 @export var name: String:

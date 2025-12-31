@@ -37,16 +37,19 @@ enum CharacterType {
 @export_flags_2d_physics var bullet_mask: int
 
 @export_category("Bullet")
-@export var bullet_scene = Global.MACHINEGUN ## 発射される弾のシーン
+@export var bullet: CharacterBody2D  ## 発射される弾のノード
 
-var bullet: Bullet ## シーンツリーには追加されず、プロパティの参照先となるだけの弾
 var can_shoot: bool = true ## 弾が発射可能かどうかのフラグ
 
 var hp: int = 10 ## キャラクターのHPの現在値。0になると機能を停止する。
 
 func _ready() -> void:
-	bullet = _create_bullet_instance(bullet_scene)
 	hp = bullet.hp
+	
+	# 同じBullet型のインスタンスを敵味方問わず使い回せるように、
+	# 弾のレイヤーとマスクは発射したキャラクター側で指定する。
+	bullet.collision_layer = bullet_layer
+	bullet.collision_mask = bullet_mask
 
 ## 弾が発射可能になった時、[code]shoot()[/code]関数を呼び、弾を発射する関数。
 func _physics_process(delta: float) -> void:
@@ -60,34 +63,18 @@ func _physics_process(delta: float) -> void:
 func _shoot() -> void:
 	can_shoot = false
 	
-	var instance := _create_bullet_instance(bullet_scene)
-	if instance == null:
+	if bullet == null:
 		return
 	
-	# 同じBullet型のインスタンスを敵味方問わず使い回せるように、
-	# 弾のレイヤーとマスクは発射したキャラクター側で指定する。
-	instance.collision_layer = bullet_layer
-	instance.collision_mask = bullet_mask
-	instance.global_position = global_position
-	get_parent().add_child(instance)
-	await get_tree().create_timer(instance.fire_rate).timeout
-	can_shoot = true
-
-## [member CharacterBase.bullet_scene]が存在しなかった場合や、
-##Bullet型でなかった場合は[code]null[/code]を返し、
-##そうでなければ複製された[Bullet]を返す関数。
-func _create_bullet_instance(scene: PackedScene) -> Bullet:
-	if scene == null:
-		printerr("bullet_sceneが未設定です。")
-		return null
+	var shot := bullet.duplicate() ## 複製されて実際に発射する弾のノード
+	var tween := shot.create_tween() ## 弾の生存時間を過ぎると削除する[Tween]
+	tween.tween_interval(shot.life_time)
+	tween.tween_callback(shot.queue_free)
+	shot.global_position = global_position
+	get_parent().add_child(shot)
 	
-	var instance := scene.instantiate()
-	if not instance is Bullet:
-		printerr("引数に設定されているシーンがBulletクラスではありません。")
-		instance.queue_free()
-		return null
-		
-	return instance as Bullet
+	await get_tree().create_timer(shot.fire_rate).timeout
+	can_shoot = true
 
 ## ダメージを受けた時に呼ばれる関数。[br]
 ## [param amount]:受けたダメージ数。[br]

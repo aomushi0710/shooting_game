@@ -7,46 +7,31 @@ const BULLET_SPEED_SCALE := 10
 const MOVE_SPEED_SCALE := 10
 const MAX_POINT := 100 ## 割り振り可能な合計ポイント数
 
-enum ParamID { ## パラメータの一覧とそのID
-	NONE = -1,
-	# 以下、基礎パラメータ
-	HP, ## 体力
-	DAMAGE, ## 攻撃力
-	MOVE_SPEED, ## 移動速度
-	PENETRATION, ## 貫通力
-	BULLET_SPEED, ## 弾速
-	FIRE_RATE, ## 連射力
-	LIFE_TIME, ## 持続時間
-	# 以下、固有パラメータ
-	PELLET_COUNT = 100, ## 散弾数(ショットガン専用)
-	EXPLOSION_RADIUS, ## 爆発半径(ミサイル専用)
-	HOMING_STRENGTH, ## 追尾力(ホーミング専用)
-	LASER_WIDTH, ## レーザー幅(レーザー専用)
-}
-
 var hp: int:
-	get: return get_param_value(ParamID.HP)
+	get: return get_param_value(ParamID.ID.HP)
 var damage: int:
-	get: return get_param_value(ParamID.DAMAGE)
+	get: return get_param_value(ParamID.ID.DAMAGE)
 var move_speed: int:
-	get: return get_param_value(ParamID.MOVE_SPEED)
+	get: return get_param_value(ParamID.ID.MOVE_SPEED)
 var penetration: int:
-	get: return get_param_value(ParamID.PENETRATION)
+	get: return get_param_value(ParamID.ID.PENETRATION)
 var bullet_speed: int:
-	get: return get_param_value(ParamID.BULLET_SPEED)
+	get: return get_param_value(ParamID.ID.BULLET_SPEED)
 var fire_rate: float:
-	get: return get_param_value(ParamID.FIRE_RATE)
+	get: return get_param_value(ParamID.ID.FIRE_RATE)
 var life_time: float:
-	get: return get_param_value(ParamID.LIFE_TIME)
+	get: return get_param_value(ParamID.ID.LIFE_TIME)
 
 ## 敵を貫通できる残り回数。この値が0の状態で弾が衝突すると弾が消滅する。
 var penetration_count: int
+var base_direction := Vector2.RIGHT ## 弾を発射する方向
+var is_duplicated := false ## 弾が複製されたものであるかどうかのフラグ
 
 @export var parameters: Array[BulletParameter]
 
-## [enum ParamID]を指定して、該当するパラメータが存在していればその
+## [enum ParamID.ID]を指定して、該当するパラメータが存在していればその
 ##[BulletParametr]を返し、そうでなければ[code]null[/code]を返す関数。
-func get_param(id: Bullet.ParamID) -> BulletParameter:
+func get_param(id: ParamID.ID) -> BulletParameter:
 	var param_ids := parameters.map(func(p: BulletParameter): return p.id)
 	var index := param_ids.find(id)
 	
@@ -56,10 +41,10 @@ func get_param(id: Bullet.ParamID) -> BulletParameter:
 	else:
 		return parameters[index]
 
-## [enum ParamID]を指定して、該当するパラメータが存在していればその
+## [enum ParamID.ID]を指定して、該当するパラメータが存在していればその
 ##[b][BulletParametr]の[member BulletParameter.value]を返し[/b]、
 ##[BulletParameter]が存在していなければ[code]null[/code]を返す関数。
-func get_param_value(id: Bullet.ParamID) -> Variant:
+func get_param_value(id: ParamID.ID) -> Variant:
 	var param := get_param(id)
 	
 	if param == null:
@@ -114,7 +99,6 @@ func _ready() -> void:
 	_update_connections()
 	if not Engine.is_editor_hint():
 		penetration_count = penetration
-		get_tree().create_timer(life_time).timeout.connect(queue_free)
 
 ## 各パラメータに振り分けられるポイント数についてインスペクタ上に表示する関数
 func _get_property_list() -> Array:
