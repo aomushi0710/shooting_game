@@ -25,7 +25,6 @@ var life_time: float:
 ## 敵を貫通できる残り回数。この値が0の状態で弾が衝突すると弾が消滅する。
 var penetration_count: int
 var base_direction := Vector2.RIGHT ## 弾を発射する方向
-var is_duplicated := false ## 弾が複製されたものであるかどうかのフラグ
 
 @export var parameters: Array[BulletParameter]
 

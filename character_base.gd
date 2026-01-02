@@ -44,6 +44,10 @@ var can_shoot: bool = true ## 弾が発射可能かどうかのフラグ
 var hp: int = 10 ## キャラクターのHPの現在値。0になると機能を停止する。
 
 func _ready() -> void:
+	# キャラクターが所持している弾の処理を止める
+	bullet.process_mode = Node.PROCESS_MODE_DISABLED
+	bullet.hide()
+	
 	hp = bullet.hp
 	
 	# 同じBullet型のインスタンスを敵味方問わず使い回せるように、
@@ -67,6 +71,10 @@ func _shoot() -> void:
 		return
 	
 	var shot := bullet.duplicate() ## 複製されて実際に発射する弾のノード
+	# 発射された弾の処理は再開させる
+	shot.process_mode = Node.PROCESS_MODE_INHERIT
+	shot.show()
+	
 	var tween := shot.create_tween() ## 弾の生存時間を過ぎると削除する[Tween]
 	tween.tween_interval(shot.life_time)
 	tween.tween_callback(shot.queue_free)
