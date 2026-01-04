@@ -1,9 +1,35 @@
-[gd_scene load_steps=3 format=3 uid="uid://drsktcmugrlg"]
+[gd_scene load_steps=9 format=3 uid="uid://drsktcmugrlg"]
 
 [ext_resource type="PackedScene" uid="uid://cytrdovuf5srs" path="res://player.tscn" id="1_6eo5e"]
+[ext_resource type="Script" uid="uid://cebktu8waj73s" path="res://stage.gd" id="1_rnkuw"]
+[ext_resource type="Script" uid="uid://y0ttg24ghwm0" path="res://stage/stage_data.gd" id="2_16g40"]
 [ext_resource type="PackedScene" uid="uid://byhlge6g4u1yx" path="res://enemy.tscn" id="2_aees8"]
+[ext_resource type="Script" uid="uid://bps4f8b5sbfhm" path="res://spawn_data.gd" id="3_vpggq"]
 
-[node name="Stage" type="Node2D"]
+[sub_resource type="Resource" id="Resource_1edn8"]
+script = ExtResource("3_vpggq")
+time = 2.0
+enemy = ExtResource("2_aees8")
+position = Vector2(960, 0)
+metadata/_custom_type_script = "uid://bps4f8b5sbfhm"
+
+[sub_resource type="Resource" id="Resource_16g40"]
+script = ExtResource("3_vpggq")
+time = 5.0
+enemy = ExtResource("2_aees8")
+position = Vector2(100, 100)
+metadata/_custom_type_script = "uid://bps4f8b5sbfhm"
+
+[sub_resource type="Resource" id="Resource_vsjsl"]
+script = ExtResource("2_16g40")
+name = ""
+spawn_data = Array[ExtResource("3_vpggq")]([SubResource("Resource_1edn8"), SubResource("Resource_16g40")])
+metadata/_custom_type_script = "uid://y0ttg24ghwm0"
+
+[node name="Stage" type="Node2D" node_paths=PackedStringArray("enemies_node")]
+script = ExtResource("1_rnkuw")
+stage_data = SubResource("Resource_vsjsl")
+enemies_node = NodePath("Enemies")
 
 [node name="Player" parent="." instance=ExtResource("1_6eo5e")]
 position = Vector2(0, 270)
@@ -16,3 +42,8 @@ position = Vector2(701, 172)
 
 [node name="Enemy3" parent="." instance=ExtResource("2_aees8")]
 position = Vector2(873, 175)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(480, 270)
+
+[node name="Enemies" type="Node2D" parent="."]

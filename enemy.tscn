@@ -114,6 +114,7 @@ point_per_val = 1
 metadata/_custom_type_script = "uid://dgopjxmdwd2pi"
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("bullet")]
+scale = Vector2(0.5, 0.5)
 collision_layer = 2
 collision_mask = 13
 script = ExtResource("1_4gyqm")
@@ -130,6 +131,8 @@ self_modulate = Color(1, 0, 0, 1)
 texture = ExtResource("1_7k104")
 
 [node name="machinegun" parent="." instance=ExtResource("2_qi2p4")]
+process_mode = 4
+visible = false
 collision_layer = 16
 collision_mask = 5
 parameters = Array[ExtResource("4_iifgy")]([SubResource("Resource_yxs7v"), SubResource("Resource_b2ui8"), SubResource("Resource_5imay"), SubResource("Resource_5xrss"), SubResource("Resource_5qqlh"), SubResource("Resource_gvupl"), SubResource("Resource_ehvju")])
