@@ -10,4 +10,4 @@ bullet_color = Color(1, 0, 0, 1)
 
 [node name="Color" parent="." index="1"]
 modulate = Color(1, 0, 0, 1)
-frame_progress = 0.815173
+frame_progress = 0.822024

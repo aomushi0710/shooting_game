@@ -1,23 +1,28 @@
-[gd_scene load_steps=9 format=3 uid="uid://drsktcmugrlg"]
+[gd_scene load_steps=10 format=3 uid="uid://drsktcmugrlg"]
 
 [ext_resource type="PackedScene" uid="uid://cytrdovuf5srs" path="res://player.tscn" id="1_6eo5e"]
 [ext_resource type="Script" uid="uid://cebktu8waj73s" path="res://stage.gd" id="1_rnkuw"]
 [ext_resource type="Script" uid="uid://y0ttg24ghwm0" path="res://stage/stage_data.gd" id="2_16g40"]
 [ext_resource type="PackedScene" uid="uid://byhlge6g4u1yx" path="res://enemy.tscn" id="2_aees8"]
 [ext_resource type="Script" uid="uid://bps4f8b5sbfhm" path="res://spawn_data.gd" id="3_vpggq"]
+[ext_resource type="Curve2D" uid="uid://7b088e7agwfs" path="res://curve2d/straight.tres" id="5_vpggq"]
 
 [sub_resource type="Resource" id="Resource_1edn8"]
 script = ExtResource("3_vpggq")
 time = 2.0
 enemy = ExtResource("2_aees8")
-position = Vector2(960, 0)
+position = Vector2(960, 100)
+path = ExtResource("5_vpggq")
+duration = 10.0
 metadata/_custom_type_script = "uid://bps4f8b5sbfhm"
 
 [sub_resource type="Resource" id="Resource_16g40"]
 script = ExtResource("3_vpggq")
 time = 5.0
 enemy = ExtResource("2_aees8")
-position = Vector2(100, 100)
+position = Vector2(960, 300)
+path = ExtResource("5_vpggq")
+duration = 10.0
 metadata/_custom_type_script = "uid://bps4f8b5sbfhm"
 
 [sub_resource type="Resource" id="Resource_vsjsl"]
@@ -26,24 +31,18 @@ name = ""
 spawn_data = Array[ExtResource("3_vpggq")]([SubResource("Resource_1edn8"), SubResource("Resource_16g40")])
 metadata/_custom_type_script = "uid://y0ttg24ghwm0"
 
-[node name="Stage" type="Node2D" node_paths=PackedStringArray("enemies_node")]
+[node name="Stage" type="Node2D" node_paths=PackedStringArray("enemies_node", "bullets_node")]
 script = ExtResource("1_rnkuw")
 stage_data = SubResource("Resource_vsjsl")
 enemies_node = NodePath("Enemies")
+bullets_node = NodePath("Bullets")
 
 [node name="Player" parent="." instance=ExtResource("1_6eo5e")]
 position = Vector2(0, 270)
-
-[node name="Enemy" parent="." instance=ExtResource("2_aees8")]
-position = Vector2(532, 174)
-
-[node name="Enemy2" parent="." instance=ExtResource("2_aees8")]
-position = Vector2(701, 172)
-
-[node name="Enemy3" parent="." instance=ExtResource("2_aees8")]
-position = Vector2(873, 175)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(480, 270)
 
 [node name="Enemies" type="Node2D" parent="."]
+
+[node name="Bullets" type="Node2D" parent="."]

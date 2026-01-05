@@ -79,7 +79,7 @@ func _shoot() -> void:
 	tween.tween_interval(shot.life_time)
 	tween.tween_callback(shot.queue_free)
 	shot.global_position = global_position
-	get_parent().add_child(shot)
+	get_tree().current_scene.bullets_node.add_child(shot)
 	
 	await get_tree().create_timer(shot.fire_rate).timeout
 	can_shoot = true
