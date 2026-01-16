@@ -11,6 +11,9 @@ enum CharacterType {
 	ENEMY, ## 敵
 }
 
+@export var sprite2d: Sprite2D ## キャラクターの見た目
+@export var bullet: CharacterBody2D  ## 発射される弾のノード
+
 @export_category("Layer & Mask")
 ## キャラクターの分類。値によって、レイヤーとマスクがテンプレート通りに設定されます。
 @export var character_type: CharacterType = CharacterType.CUSTOM:
@@ -36,11 +39,7 @@ enum CharacterType {
 ## キャラクターが発射した弾のマスク
 @export_flags_2d_physics var bullet_mask: int
 
-@export_category("Bullet")
-@export var bullet: CharacterBody2D  ## 発射される弾のノード
-
 var can_shoot: bool = true ## 弾が発射可能かどうかのフラグ
-
 var hp: int = 10 ## キャラクターのHPの現在値。0になると機能を停止する。
 
 func _ready() -> void:
@@ -75,7 +74,9 @@ func _shoot() -> void:
 	shot.process_mode = Node.PROCESS_MODE_INHERIT
 	shot.show()
 	
-	var tween := shot.create_tween() ## 弾の生存時間を過ぎると削除する[Tween]
+	# 弾の追加場所はStage -> Bulletsの中
+	## 弾の生存時間を過ぎると削除する[Tween]
+	var tween := shot.create_tween()
 	tween.tween_interval(shot.life_time)
 	tween.tween_callback(shot.queue_free)
 	shot.global_position = global_position
@@ -100,3 +101,12 @@ func take_damage(amount: int, from_player: bool = true) -> void:
 	
 	if hp <= 0:
 		queue_free()
+
+## キャラクターの[member CharacterBase.sprite2d]のテクスチャサイズから、
+##マージンを計算し取得する関数
+func get_margin() -> Vector2:
+	if sprite2d and sprite2d.texture:
+		return sprite2d.texture.get_size() * sprite2d.scale / 2.0
+	else:
+		printerr("このキャラクターにはSprite2Dがありません！")
+		return Vector2.ZERO

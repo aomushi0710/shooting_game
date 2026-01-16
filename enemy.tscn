@@ -113,15 +113,16 @@ use_point = false
 point_per_val = 1
 metadata/_custom_type_script = "uid://dgopjxmdwd2pi"
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("bullet")]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("sprite2d", "bullet")]
 scale = Vector2(0.5, 0.5)
 collision_layer = 2
 collision_mask = 13
 script = ExtResource("1_4gyqm")
+sprite2d = NodePath("Sprite2D")
+bullet = NodePath("machinegun")
 character_type = 2
 bullet_layer = 16
 bullet_mask = 5
-bullet = NodePath("machinegun")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_4gyqm")

@@ -1,34 +1,69 @@
-[gd_scene load_steps=10 format=3 uid="uid://drsktcmugrlg"]
+[gd_scene load_steps=13 format=3 uid="uid://drsktcmugrlg"]
 
 [ext_resource type="PackedScene" uid="uid://cytrdovuf5srs" path="res://player.tscn" id="1_6eo5e"]
 [ext_resource type="Script" uid="uid://cebktu8waj73s" path="res://stage.gd" id="1_rnkuw"]
 [ext_resource type="Script" uid="uid://y0ttg24ghwm0" path="res://stage/stage_data.gd" id="2_16g40"]
 [ext_resource type="PackedScene" uid="uid://byhlge6g4u1yx" path="res://enemy.tscn" id="2_aees8"]
 [ext_resource type="Script" uid="uid://bps4f8b5sbfhm" path="res://spawn_data.gd" id="3_vpggq"]
+[ext_resource type="Curve2D" uid="uid://c2sglimhdfmr3" path="res://curve2d/sine_curve.tres" id="5_1edn8"]
 [ext_resource type="Curve2D" uid="uid://7b088e7agwfs" path="res://curve2d/straight.tres" id="5_vpggq"]
+
+[sub_resource type="Resource" id="Resource_vpggq"]
+script = ExtResource("3_vpggq")
+time = 1.0
+enemy = ExtResource("2_aees8")
+path = ExtResource("5_1edn8")
+path_scale = Vector2(1, 1)
+duration = 6.0
+spawn_position = Vector2(1024, 200)
+spawn_direction = 1
+despawn_position = Vector2(-64, 200)
+despawn_direction = 2
+metadata/_custom_type_script = "uid://bps4f8b5sbfhm"
 
 [sub_resource type="Resource" id="Resource_1edn8"]
 script = ExtResource("3_vpggq")
-time = 2.0
-enemy = ExtResource("2_aees8")
-position = Vector2(960, 100)
-path = ExtResource("5_vpggq")
-duration = 10.0
-metadata/_custom_type_script = "uid://bps4f8b5sbfhm"
-
-[sub_resource type="Resource" id="Resource_16g40"]
-script = ExtResource("3_vpggq")
 time = 5.0
 enemy = ExtResource("2_aees8")
-position = Vector2(960, 300)
 path = ExtResource("5_vpggq")
-duration = 10.0
+path_scale = Vector2(1, 1)
+duration = 1.0
+spawn_position = Vector2(500, -64)
+spawn_direction = 3
+despawn_position = Vector2(500, 604)
+despawn_direction = 4
+metadata/_custom_type_script = "uid://bps4f8b5sbfhm"
+
+[sub_resource type="Resource" id="Resource_jx6rg"]
+script = ExtResource("3_vpggq")
+time = 7.0
+enemy = ExtResource("2_aees8")
+path = ExtResource("5_1edn8")
+path_scale = Vector2(1, 1)
+duration = 6.0
+spawn_position = Vector2(1024, 200)
+spawn_direction = 1
+despawn_position = Vector2(-64, 200)
+despawn_direction = 2
+metadata/_custom_type_script = "uid://bps4f8b5sbfhm"
+
+[sub_resource type="Resource" id="Resource_g8oy1"]
+script = ExtResource("3_vpggq")
+time = 7.0
+enemy = ExtResource("2_aees8")
+path = ExtResource("5_1edn8")
+path_scale = Vector2(1, -1)
+duration = 6.0
+spawn_position = Vector2(1024, 200)
+spawn_direction = 1
+despawn_position = Vector2(-64, 200)
+despawn_direction = 2
 metadata/_custom_type_script = "uid://bps4f8b5sbfhm"
 
 [sub_resource type="Resource" id="Resource_vsjsl"]
 script = ExtResource("2_16g40")
 name = ""
-spawn_data = Array[ExtResource("3_vpggq")]([SubResource("Resource_1edn8"), SubResource("Resource_16g40")])
+spawn_data = Array[ExtResource("3_vpggq")]([SubResource("Resource_vpggq"), SubResource("Resource_1edn8"), SubResource("Resource_jx6rg"), SubResource("Resource_g8oy1")])
 metadata/_custom_type_script = "uid://y0ttg24ghwm0"
 
 [node name="Stage" type="Node2D" node_paths=PackedStringArray("enemies_node", "bullets_node")]

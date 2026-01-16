@@ -1,5 +1,7 @@
 extends Node2D
 
+const BASE_CURVE_LENGTH = 960.0 
+
 @export var stage_data: StageData ## ステージの各種情報
 @export var enemies_node: Node2D ## 敵ノードを追加する親ノード
 @export var bullets_node: Node2D ## 弾ノードを追加する親ノード
@@ -27,19 +29,28 @@ func _spawn_enemy(data: SpawnData) -> void:
 		return
 	
 	var enemy = data.enemy.instantiate() ## シーンから生成された敵ノード
+	var margin = enemy.get_margin()
 	
 	# パスデータが存在しない場合は、指定された座標に出現だけさせて終了する。
 	if not data.path:
-		enemy.global_position = data.position
+		enemy.global_position = data.spawn_position
 		enemies_node.add_child(enemy)
 		return
 	
-	## 敵ノードの通り道
 	var path_node = Path2D.new()
 	path_node.curve = data.path
-	path_node.global_position = data.position
+	path_node.global_position = data.spawn_position
 	
-	## [param path_node]を通る土台
+	# 2. 回転（ゴールの方を向く）
+	var vector_to_target = data.despawn_position - data.spawn_position
+	path_node.rotation = vector_to_target.angle() - PI
+	
+	# 3. 伸縮（距離に合わせてスケール）
+	var base_scale := Vector2(
+		vector_to_target.length() / BASE_CURVE_LENGTH, 1.0)
+	path_node.scale = base_scale * data.path_scale
+	
+	# 4. 親子関係の構築 (Stage -> Path -> Follow -> Enemy)
 	var follow_node = PathFollow2D.new()
 	follow_node.loop = false
 	follow_node.rotates = false
@@ -52,7 +63,6 @@ func _spawn_enemy(data: SpawnData) -> void:
 	# 敵ノードは[param follow_node]の子として追従するため、本体の位置は(0, 0)。
 	enemy.position = Vector2.ZERO
 	
-	## 敵ノードが動くアニメーション
-	var tween = follow_node.create_tween()
+	var tween = create_tween()
 	tween.tween_property(follow_node, "progress_ratio", 1.0, data.duration)
-	tween.tween_callback(path_node.queue_free)
+	tween.tween_callback(path_node.queue_free) # 終わったらパスごと削除
