@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://drsktcmugrlg"]
+[gd_scene load_steps=16 format=3 uid="uid://drsktcmugrlg"]
 
 [ext_resource type="PackedScene" uid="uid://cytrdovuf5srs" path="res://player.tscn" id="1_6eo5e"]
 [ext_resource type="Script" uid="uid://cebktu8waj73s" path="res://stage.gd" id="1_rnkuw"]
@@ -8,39 +8,39 @@
 [ext_resource type="Curve2D" uid="uid://c2sglimhdfmr3" path="res://curve2d/sine_curve.tres" id="5_1edn8"]
 [ext_resource type="Curve2D" uid="uid://7b088e7agwfs" path="res://curve2d/straight.tres" id="5_vpggq"]
 
+[sub_resource type="Resource" id="Resource_1edn8"]
+script = ExtResource("3_vpggq")
+time = 0.0
+enemy = ExtResource("2_aees8")
+path = ExtResource("5_vpggq")
+path_scale = Vector2(1, 1)
+duration = 5.0
+spawn_position = Vector2(1024, 100)
+spawn_direction = 1
+despawn_position = Vector2(-64, 100)
+despawn_direction = 2
+metadata/_custom_type_script = "uid://bps4f8b5sbfhm"
+
 [sub_resource type="Resource" id="Resource_vpggq"]
 script = ExtResource("3_vpggq")
 time = 1.0
 enemy = ExtResource("2_aees8")
-path = ExtResource("5_1edn8")
-path_scale = Vector2(1, 1)
-duration = 6.0
-spawn_position = Vector2(1024, 200)
-spawn_direction = 1
-despawn_position = Vector2(-64, 200)
-despawn_direction = 2
-metadata/_custom_type_script = "uid://bps4f8b5sbfhm"
-
-[sub_resource type="Resource" id="Resource_1edn8"]
-script = ExtResource("3_vpggq")
-time = 5.0
-enemy = ExtResource("2_aees8")
 path = ExtResource("5_vpggq")
 path_scale = Vector2(1, 1)
-duration = 1.0
-spawn_position = Vector2(500, -64)
-spawn_direction = 3
-despawn_position = Vector2(500, 604)
-despawn_direction = 4
+duration = 5.0
+spawn_position = Vector2(1024, 150)
+spawn_direction = 1
+despawn_position = Vector2(-64, 150)
+despawn_direction = 2
 metadata/_custom_type_script = "uid://bps4f8b5sbfhm"
 
 [sub_resource type="Resource" id="Resource_jx6rg"]
 script = ExtResource("3_vpggq")
-time = 7.0
+time = 2.0
 enemy = ExtResource("2_aees8")
-path = ExtResource("5_1edn8")
+path = ExtResource("5_vpggq")
 path_scale = Vector2(1, 1)
-duration = 6.0
+duration = 5.0
 spawn_position = Vector2(1024, 200)
 spawn_direction = 1
 despawn_position = Vector2(-64, 200)
@@ -49,21 +49,60 @@ metadata/_custom_type_script = "uid://bps4f8b5sbfhm"
 
 [sub_resource type="Resource" id="Resource_g8oy1"]
 script = ExtResource("3_vpggq")
-time = 7.0
+time = 10.0
 enemy = ExtResource("2_aees8")
 path = ExtResource("5_1edn8")
-path_scale = Vector2(1, -1)
-duration = 6.0
-spawn_position = Vector2(1024, 200)
+path_scale = Vector2(1, 1)
+duration = 5.0
+spawn_position = Vector2(1024, 270)
 spawn_direction = 1
-despawn_position = Vector2(-64, 200)
+despawn_position = Vector2(-64, 270)
+despawn_direction = 2
+metadata/_custom_type_script = "uid://bps4f8b5sbfhm"
+
+[sub_resource type="Resource" id="Resource_i76fu"]
+script = ExtResource("3_vpggq")
+time = 15.0
+enemy = ExtResource("2_aees8")
+path = ExtResource("5_1edn8")
+path_scale = Vector2(1, 2)
+duration = 5.0
+spawn_position = Vector2(1024, 270)
+spawn_direction = 1
+despawn_position = Vector2(-64, 270)
+despawn_direction = 2
+metadata/_custom_type_script = "uid://bps4f8b5sbfhm"
+
+[sub_resource type="Resource" id="Resource_uis2a"]
+script = ExtResource("3_vpggq")
+time = 20.0
+enemy = ExtResource("2_aees8")
+path = ExtResource("5_1edn8")
+path_scale = Vector2(1, 3)
+duration = 10.0
+spawn_position = Vector2(1024, 270)
+spawn_direction = 1
+despawn_position = Vector2(-64, 270)
+despawn_direction = 2
+metadata/_custom_type_script = "uid://bps4f8b5sbfhm"
+
+[sub_resource type="Resource" id="Resource_m1lne"]
+script = ExtResource("3_vpggq")
+time = 20.0
+enemy = ExtResource("2_aees8")
+path = ExtResource("5_1edn8")
+path_scale = Vector2(1, -3)
+duration = 10.0
+spawn_position = Vector2(1024, 270)
+spawn_direction = 1
+despawn_position = Vector2(-64, 270)
 despawn_direction = 2
 metadata/_custom_type_script = "uid://bps4f8b5sbfhm"
 
 [sub_resource type="Resource" id="Resource_vsjsl"]
 script = ExtResource("2_16g40")
 name = ""
-spawn_data = Array[ExtResource("3_vpggq")]([SubResource("Resource_vpggq"), SubResource("Resource_1edn8"), SubResource("Resource_jx6rg"), SubResource("Resource_g8oy1")])
+spawn_data = Array[ExtResource("3_vpggq")]([SubResource("Resource_1edn8"), SubResource("Resource_vpggq"), SubResource("Resource_jx6rg"), SubResource("Resource_g8oy1"), SubResource("Resource_i76fu"), SubResource("Resource_uis2a"), SubResource("Resource_m1lne")])
 metadata/_custom_type_script = "uid://y0ttg24ghwm0"
 
 [node name="Stage" type="Node2D" node_paths=PackedStringArray("enemies_node", "bullets_node")]

@@ -28,8 +28,7 @@ func _spawn_enemy(data: SpawnData) -> void:
 		printerr("敵シーンが設定されていません！")
 		return
 	
-	var enemy = data.enemy.instantiate() ## シーンから生成された敵ノード
-	var margin = enemy.get_margin()
+	var enemy: Enemy = data.enemy.instantiate() ## シーンから生成された敵ノード
 	
 	# パスデータが存在しない場合は、指定された座標に出現だけさせて終了する。
 	if not data.path:
@@ -37,31 +36,30 @@ func _spawn_enemy(data: SpawnData) -> void:
 		enemies_node.add_child(enemy)
 		return
 	
-	var path_node = Path2D.new()
+	var path_node := Path2D.new() ## 敵が通る軌道
 	path_node.curve = data.path
 	path_node.global_position = data.spawn_position
 	
-	# 2. 回転（ゴールの方を向く）
 	var vector_to_target = data.despawn_position - data.spawn_position
-	path_node.rotation = vector_to_target.angle() - PI
+	path_node.rotation = vector_to_target.angle() - PI # 左向き固定
 	
-	# 3. 伸縮（距離に合わせてスケール）
+	# 軌道のスケーリング
 	var base_scale := Vector2(
 		vector_to_target.length() / BASE_CURVE_LENGTH, 1.0)
 	path_node.scale = base_scale * data.path_scale
 	
-	# 4. 親子関係の構築 (Stage -> Path -> Follow -> Enemy)
-	var follow_node = PathFollow2D.new()
+	var follow_node := PathFollow2D.new()
 	follow_node.loop = false
 	follow_node.rotates = false
 	
-	# 敵ノードをパス通りに動かすための親子関係を作る。
+	# Stage -> Path -> Follow -> Enemy
 	enemies_node.add_child(path_node)
 	path_node.add_child(follow_node)
 	follow_node.add_child(enemy)
 	
-	# 敵ノードは[param follow_node]の子として追従するため、本体の位置は(0, 0)。
-	enemy.position = Vector2.ZERO
+	enemy.position = Vector2.ZERO # enemyノードはfollow_nodeの子として追従するため、本体の位置は(0, 0)。
+	enemy.scale /= path_node.scale # 親のscaleの影響を受けないように元に戻す
+	enemy.scale.y *= -1.0 # テクスチャの上下反転を修正
 	
 	var tween = create_tween()
 	tween.tween_property(follow_node, "progress_ratio", 1.0, data.duration)

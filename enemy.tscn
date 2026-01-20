@@ -114,7 +114,7 @@ point_per_val = 1
 metadata/_custom_type_script = "uid://dgopjxmdwd2pi"
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("sprite2d", "bullet")]
-scale = Vector2(0.5, 0.5)
+scale = Vector2(-0.5, -0.5)
 collision_layer = 2
 collision_mask = 13
 script = ExtResource("1_4gyqm")
