@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cytrdovuf5srs"]
+[gd_scene load_steps=14 format=3 uid="uid://cytrdovuf5srs"]
 
 [ext_resource type="Script" uid="uid://bi8vma3rww7fu" path="res://player.gd" id="1_onrkg"]
 [ext_resource type="PackedScene" uid="uid://d3sse6ayqeywm" path="res://bullet/machinegun.tscn" id="2_hqtel"]
@@ -7,6 +7,17 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hqtel"]
 size = Vector2(128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hqtel"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_i3pqv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="Resource" id="Resource_s3n37"]
 Resource = null
@@ -46,7 +57,7 @@ resource_scene_unique_id = "Resource_xkox8"
 script = ExtResource("4_sweqy")
 id = 2
 name = "move_speed"
-value = 10.0
+value = 39.0
 min_value = 0.0
 type = 2
 use_point = true
@@ -76,7 +87,7 @@ resource_scene_unique_id = "Resource_eycpt"
 script = ExtResource("4_sweqy")
 id = 4
 name = "bullet_speed"
-value = 59.0
+value = 30.0
 min_value = 0.0
 type = 2
 use_point = true
@@ -113,11 +124,11 @@ use_point = false
 point_per_val = 1
 metadata/_custom_type_script = "uid://dgopjxmdwd2pi"
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite2d", "bullet")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("texture", "bullet")]
 scale = Vector2(0.5, 0.5)
 collision_mask = 23
 script = ExtResource("1_onrkg")
-sprite2d = NodePath("Sprite2D")
+texture = NodePath("Texture")
 bullet = NodePath("machinegun")
 character_type = 1
 bullet_layer = 8
@@ -126,8 +137,8 @@ bullet_mask = 6
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_hqtel")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_i3pqv")
+[node name="Texture" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_hqtel")
 
 [node name="machinegun" parent="." instance=ExtResource("2_hqtel")]
 process_mode = 4

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cindk2uyyumrs"
-path="res://.godot/imported/nachinegun_base.png-3abd9ff237694df86a76ff0237c58725.ctex"
+path="res://.godot/imported/nachinegun_base.png-ae00019253e1cd3dba72e1f56b71c3d5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://image/nachinegun_base.png"
-dest_files=["res://.godot/imported/nachinegun_base.png-3abd9ff237694df86a76ff0237c58725.ctex"]
+source_file="res://asset/img/bullet/nachinegun_base.png"
+dest_files=["res://.godot/imported/nachinegun_base.png-ae00019253e1cd3dba72e1f56b71c3d5.ctex"]
 
 [params]
 

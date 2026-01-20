@@ -11,7 +11,7 @@ enum CharacterType {
 	ENEMY, ## 敵
 }
 
-@export var sprite2d: Sprite2D ## キャラクターの見た目
+@export var texture: AnimatedSprite2D ## キャラクターの見た目
 @export var bullet: CharacterBody2D  ## 発射される弾のノード
 
 @export_category("Layer & Mask")
@@ -53,6 +53,8 @@ func _ready() -> void:
 	# 弾のレイヤーとマスクは発射したキャラクター側で指定する。
 	bullet.collision_layer = bullet_layer
 	bullet.collision_mask = bullet_mask
+	
+	texture.play()
 
 ## 弾が発射可能になった時、[code]shoot()[/code]関数を呼び、弾を発射する関数。
 func _physics_process(delta: float) -> void:
@@ -102,11 +104,16 @@ func take_damage(amount: int, from_player: bool = true) -> void:
 	if hp <= 0:
 		queue_free()
 
-## キャラクターの[member CharacterBase.sprite2d]のテクスチャサイズから、
+## キャラクターの[member CharacterBase.texture]のテクスチャサイズから、
 ##マージンを計算し取得する関数
 func get_margin() -> Vector2:
-	if sprite2d and sprite2d.texture:
-		return sprite2d.texture.get_size() * sprite2d.scale / 2.0
+	if texture and texture.sprite_frames:
+		var frame := texture.sprite_frames.get_frame_texture(texture.animation, 0)
+		if frame:
+			return frame.get_size() * texture.scale / 2.0
+		else:
+			printerr("このAnimatedSprite2Dにはアニメーションがありません！")
+			return Vector2.ZERO
 	else:
-		printerr("このキャラクターにはSprite2Dがありません！")
+		printerr("このキャラクターにはAnimatedSprite2Dがありません！")
 		return Vector2.ZERO

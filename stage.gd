@@ -59,7 +59,6 @@ func _spawn_enemy(data: SpawnData) -> void:
 	
 	enemy.position = Vector2.ZERO # enemyノードはfollow_nodeの子として追従するため、本体の位置は(0, 0)。
 	enemy.scale /= path_node.scale # 親のscaleの影響を受けないように元に戻す
-	enemy.scale.y *= -1.0 # テクスチャの上下反転を修正
 	
 	var tween = create_tween()
 	tween.tween_property(follow_node, "progress_ratio", 1.0, data.duration)

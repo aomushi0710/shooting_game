@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvciffcvq2h8e"
-path="res://.godot/imported/machinegun_color1.png-a6bb6d8298c9569ac4007515d55fc7aa.ctex"
+uid="uid://5sp8vvwhawk2"
+path="res://.godot/imported/machinegun_color2.png-f66ce1cc0c940a9600c07390addf05a0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://image/machinegun_color1.png"
-dest_files=["res://.godot/imported/machinegun_color1.png-a6bb6d8298c9569ac4007515d55fc7aa.ctex"]
+source_file="res://asset/img/bullet/machinegun_color2.png"
+dest_files=["res://.godot/imported/machinegun_color2.png-f66ce1cc0c940a9600c07390addf05a0.ctex"]
 
 [params]
 

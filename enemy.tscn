@@ -1,12 +1,27 @@
-[gd_scene load_steps=13 format=3 uid="uid://byhlge6g4u1yx"]
+[gd_scene load_steps=15 format=3 uid="uid://byhlge6g4u1yx"]
 
 [ext_resource type="Script" uid="uid://d2l8tntv3s3gp" path="res://enemy.gd" id="1_4gyqm"]
-[ext_resource type="Texture2D" uid="uid://h6mqo4ognvvq" path="res://icon.svg" id="1_7k104"]
+[ext_resource type="Texture2D" uid="uid://dihifmew2ywsq" path="res://asset/img/enemy/fish_0001.png" id="2_epg4t"]
 [ext_resource type="PackedScene" uid="uid://dcf6cqourjx3i" path="res://bullet/enemy/enemy_machinegun.tscn" id="2_qi2p4"]
+[ext_resource type="Texture2D" uid="uid://dtrt7tb5rvcjq" path="res://asset/img/enemy/fish_0002.png" id="3_3yqyl"]
 [ext_resource type="Script" uid="uid://dgopjxmdwd2pi" path="res://bullet_parameter/bullet_parameter.gd" id="4_iifgy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4gyqm"]
-size = Vector2(128, 128)
+size = Vector2(128, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wujgv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_epg4t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_3yqyl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="Resource" id="Resource_yxs7v"]
 Resource = null
@@ -113,12 +128,11 @@ use_point = false
 point_per_val = 1
 metadata/_custom_type_script = "uid://dgopjxmdwd2pi"
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("sprite2d", "bullet")]
-scale = Vector2(-0.5, -0.5)
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("texture", "bullet")]
 collision_layer = 2
 collision_mask = 13
 script = ExtResource("1_4gyqm")
-sprite2d = NodePath("Sprite2D")
+texture = NodePath("Texture")
 bullet = NodePath("machinegun")
 character_type = 2
 bullet_layer = 16
@@ -127,9 +141,10 @@ bullet_mask = 5
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_4gyqm")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Texture" type="AnimatedSprite2D" parent="."]
 self_modulate = Color(1, 0, 0, 1)
-texture = ExtResource("1_7k104")
+sprite_frames = SubResource("SpriteFrames_wujgv")
+frame_progress = 0.503815
 
 [node name="machinegun" parent="." instance=ExtResource("2_qi2p4")]
 process_mode = 4
