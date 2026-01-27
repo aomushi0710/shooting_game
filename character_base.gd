@@ -12,7 +12,7 @@ enum CharacterType {
 }
 
 @export var texture: AnimatedSprite2D ## キャラクターの見た目
-@export var bullet: CharacterBody2D  ## 発射される弾のノード
+@export var bullet: Bullet ## 発射される弾のノード
 
 @export_category("Layer & Mask")
 ## キャラクターの分類。値によって、レイヤーとマスクがテンプレート通りに設定されます。
@@ -40,7 +40,9 @@ enum CharacterType {
 @export_flags_2d_physics var bullet_mask: int
 
 var can_shoot: bool = true ## 弾が発射可能かどうかのフラグ
-var hp: int = 10 ## キャラクターのHPの現在値。0になると機能を停止する。
+## キャラクターのHPの現在値。[br]
+## HPの最大値は[member CharacterBase.bullet]の[member Bullet.hp]を参照
+var hp: int = 10
 
 func _ready() -> void:
 	# キャラクターが所持している弾の処理を止める
@@ -102,7 +104,11 @@ func take_damage(amount: int, from_player: bool = true) -> void:
 	get_tree().current_scene.add_child(label)
 	
 	if hp <= 0:
-		queue_free()
+		defeat()
+
+## キャラクターが倒された時に呼ばれる関数
+func defeat() -> void:
+	queue_free()
 
 ## キャラクターの[member CharacterBase.texture]のテクスチャサイズから、
 ##マージンを計算し取得する関数

@@ -31,7 +31,7 @@ resource_scene_unique_id = "Resource_yxs7v"
 script = ExtResource("4_iifgy")
 id = 0
 name = "hp"
-value = 100.0
+value = 10.0
 min_value = 0.0
 type = 2
 use_point = true
@@ -132,6 +132,7 @@ metadata/_custom_type_script = "uid://dgopjxmdwd2pi"
 collision_layer = 2
 collision_mask = 13
 script = ExtResource("1_4gyqm")
+base_score = 10
 texture = NodePath("Texture")
 bullet = NodePath("machinegun")
 character_type = 2
@@ -144,7 +145,7 @@ shape = SubResource("RectangleShape2D_4gyqm")
 [node name="Texture" type="AnimatedSprite2D" parent="."]
 self_modulate = Color(1, 0, 0, 1)
 sprite_frames = SubResource("SpriteFrames_wujgv")
-frame_progress = 0.503815
+frame_progress = 0.374499
 
 [node name="machinegun" parent="." instance=ExtResource("2_qi2p4")]
 process_mode = 4

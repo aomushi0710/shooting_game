@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cmlqn8ualvshh"]
+
+[ext_resource type="FontFile" uid="uid://b54wnny48gu68" path="res://asset/font/LcdSolid-VPzB.ttf" id="1_vvbxc"]
+
+[resource]
+default_font = ExtResource("1_vvbxc")
+default_font_size = 50

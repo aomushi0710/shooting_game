@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://dt7m857nsuowd"
-path="res://.godot/imported/Let_s_go_Digital_Regular.ttf-ff65f69fef66efc4bc4733eceb8bd19e.fontdata"
+uid="uid://b54wnny48gu68"
+path="res://.godot/imported/LcdSolid-VPzB.ttf-cba02999b7e5210d083e5a522b0cdcc3.fontdata"
 
 [deps]
 
-source_file="res://font/Let_s_go_Digital_Regular.ttf"
-dest_files=["res://.godot/imported/Let_s_go_Digital_Regular.ttf-ff65f69fef66efc4bc4733eceb8bd19e.fontdata"]
+source_file="res://asset/font/LcdSolid-VPzB.ttf"
+dest_files=["res://.godot/imported/LcdSolid-VPzB.ttf-cba02999b7e5210d083e5a522b0cdcc3.fontdata"]
 
 [params]
 
