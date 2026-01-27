@@ -145,7 +145,7 @@ shape = SubResource("RectangleShape2D_4gyqm")
 [node name="Texture" type="AnimatedSprite2D" parent="."]
 self_modulate = Color(1, 0, 0, 1)
 sprite_frames = SubResource("SpriteFrames_wujgv")
-frame_progress = 0.374499
+frame_progress = 0.59679
 
 [node name="machinegun" parent="." instance=ExtResource("2_qi2p4")]
 process_mode = 4

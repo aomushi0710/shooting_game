@@ -139,7 +139,7 @@ shape = SubResource("RectangleShape2D_hqtel")
 
 [node name="Texture" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_hqtel")
-frame_progress = 0.816207
+frame_progress = 0.747565
 
 [node name="machinegun" parent="." instance=ExtResource("2_hqtel")]
 process_mode = 4

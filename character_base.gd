@@ -39,6 +39,7 @@ enum CharacterType {
 ## キャラクターが発射した弾のマスク
 @export_flags_2d_physics var bullet_mask: int
 
+var is_died: bool = false ## 死亡フラグ
 var can_shoot: bool = true ## 弾が発射可能かどうかのフラグ
 ## キャラクターのHPの現在値。[br]
 ## HPの最大値は[member CharacterBase.bullet]の[member Bullet.hp]を参照
@@ -93,6 +94,9 @@ func _shoot() -> void:
 ## [param amount]:受けたダメージ数。[br]
 ## [param from_player]:プレイヤーから敵へ与えられたダメージかどうか
 func take_damage(amount: int, from_player: bool = true) -> void:
+	if is_died:
+		return
+	
 	hp -= amount
 	
 	# ダメージ表示
@@ -104,6 +108,7 @@ func take_damage(amount: int, from_player: bool = true) -> void:
 	get_tree().current_scene.add_child(label)
 	
 	if hp <= 0:
+		is_died = true
 		defeat()
 
 ## キャラクターが倒された時に呼ばれる関数
