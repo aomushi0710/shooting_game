@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="BulletParameter" load_steps=2 format=3 uid="uid://ck6svjf2qjvrx"]
+
+[ext_resource type="Script" uid="uid://dgopjxmdwd2pi" path="res://script/bullet/bullet_parameter.gd" id="1_0i4t2"]
+
+[resource]
+Resource = null
+resource_path = "res://bullet_parameter/param4.tres"
+resource_name = "penetration"
+resource_scene_unique_id = ""
+script = ExtResource("1_0i4t2")
+id = 3
+name = "penetration"
+value = 1.0
+min_value = 0.0
+type = 2
+use_point = true
+point_per_val = 10
+metadata/_custom_type_script = "uid://dgopjxmdwd2pi"

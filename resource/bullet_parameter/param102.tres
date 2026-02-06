@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="BulletParameter" load_steps=2 format=3 uid="uid://clelegnm6witm"]
+
+[ext_resource type="Script" uid="uid://dgopjxmdwd2pi" path="res://script/bullet/bullet_parameter.gd" id="1_rw53c"]
+
+[resource]
+script = ExtResource("1_rw53c")
+id = 102
+name = ""
+value = 0.0
+type = 2
+use_point = true
+point_per_val = 10
+metadata/_custom_type_script = "uid://dgopjxmdwd2pi"

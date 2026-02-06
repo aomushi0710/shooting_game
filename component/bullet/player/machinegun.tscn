@@ -1,0 +1,52 @@
+[gd_scene load_steps=15 format=3 uid="uid://d3sse6ayqeywm"]
+
+[ext_resource type="Script" uid="uid://bhlhouvc2jqp1" path="res://script/bullet/player/machinegun.gd" id="1_dmm32"]
+[ext_resource type="Script" uid="uid://dgopjxmdwd2pi" path="res://script/bullet/bullet_parameter.gd" id="2_mtlpa"]
+[ext_resource type="Resource" uid="uid://c3fybqqjmvowk" path="res://resource/bullet_parameter/param1.tres" id="3_qbwvi"]
+[ext_resource type="Resource" uid="uid://rpxkdftgglow" path="res://resource/bullet_parameter/param2.tres" id="4_wdhdm"]
+[ext_resource type="Resource" uid="uid://dl15urdmqbjr2" path="res://resource/bullet_parameter/param3.tres" id="5_hx7fy"]
+[ext_resource type="Resource" uid="uid://ck6svjf2qjvrx" path="res://resource/bullet_parameter/param4.tres" id="6_ucf03"]
+[ext_resource type="Resource" uid="uid://b0ohxofhgcre2" path="res://resource/bullet_parameter/param5.tres" id="7_l5pr4"]
+[ext_resource type="Resource" uid="uid://t0j6uwo6pcse" path="res://resource/bullet_parameter/param6.tres" id="8_t4kmw"]
+[ext_resource type="Resource" uid="uid://bo2f56pqllmuw" path="res://resource/bullet_parameter/param7.tres" id="9_li8o7"]
+[ext_resource type="Texture2D" uid="uid://cvciffcvq2h8e" path="res://asset/img/bullet/machinegun_color1.png" id="10_xxvjp"]
+[ext_resource type="Texture2D" uid="uid://5sp8vvwhawk2" path="res://asset/img/bullet/machinegun_color2.png" id="11_7mf7q"]
+[ext_resource type="Texture2D" uid="uid://cindk2uyyumrs" path="res://asset/img/bullet/nachinegun_base.png" id="12_n6vmp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qdvth"]
+radius = 29.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0cgdj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_xxvjp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_7mf7q")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="machinegun" type="CharacterBody2D"]
+scale = Vector2(0.5, 0.5)
+collision_layer = 8
+collision_mask = 6
+velocity = Vector2(1, 0)
+script = ExtResource("1_dmm32")
+bullet_color = Color(0, 1, 1, 1)
+parameters = Array[ExtResource("2_mtlpa")]([ExtResource("3_qbwvi"), ExtResource("4_wdhdm"), ExtResource("5_hx7fy"), ExtResource("6_ucf03"), ExtResource("7_l5pr4"), ExtResource("8_t4kmw"), ExtResource("9_li8o7")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(32, 0)
+shape = SubResource("CircleShape2D_qdvth")
+
+[node name="Color" type="AnimatedSprite2D" parent="."]
+modulate = Color(0, 1, 1, 1)
+sprite_frames = SubResource("SpriteFrames_0cgdj")
+frame_progress = 0.230398
+
+[node name="Base" type="Sprite2D" parent="."]
+texture = ExtResource("12_n6vmp")

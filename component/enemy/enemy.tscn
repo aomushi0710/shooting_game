@@ -1,0 +1,156 @@
+[gd_scene load_steps=15 format=3 uid="uid://byhlge6g4u1yx"]
+
+[ext_resource type="Script" uid="uid://d2l8tntv3s3gp" path="res://script/enemy.gd" id="1_vs7h8"]
+[ext_resource type="Texture2D" uid="uid://dihifmew2ywsq" path="res://asset/img/enemy/fish_0001.png" id="2_d8b7u"]
+[ext_resource type="Texture2D" uid="uid://dtrt7tb5rvcjq" path="res://asset/img/enemy/fish_0002.png" id="3_ke443"]
+[ext_resource type="PackedScene" uid="uid://dcf6cqourjx3i" path="res://component/bullet/enemy/enemy_machinegun.tscn" id="4_t304t"]
+[ext_resource type="Script" uid="uid://dgopjxmdwd2pi" path="res://script/bullet/bullet_parameter.gd" id="5_fyd7c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4gyqm"]
+size = Vector2(128, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wujgv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_d8b7u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ke443")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_yxs7v"]
+Resource = null
+resource_path = "res://component/enemy/enemy.tscn::Resource_yxs7v"
+resource_name = "hp"
+resource_scene_unique_id = "Resource_yxs7v"
+script = ExtResource("5_fyd7c")
+id = 0
+name = "hp"
+value = 10.0
+min_value = 0.0
+type = 2
+use_point = true
+point_per_val = 1
+metadata/_custom_type_script = "uid://dgopjxmdwd2pi"
+
+[sub_resource type="Resource" id="Resource_b2ui8"]
+Resource = null
+resource_path = "res://component/enemy/enemy.tscn::Resource_b2ui8"
+resource_name = "damage"
+resource_scene_unique_id = "Resource_b2ui8"
+script = ExtResource("5_fyd7c")
+id = 1
+name = "damage"
+value = 10.0
+min_value = 0.0
+type = 2
+use_point = true
+point_per_val = 1
+metadata/_custom_type_script = "uid://dgopjxmdwd2pi"
+
+[sub_resource type="Resource" id="Resource_5imay"]
+Resource = null
+resource_path = "res://component/enemy/enemy.tscn::Resource_5imay"
+resource_name = "move_speed"
+resource_scene_unique_id = "Resource_5imay"
+script = ExtResource("5_fyd7c")
+id = 2
+name = "move_speed"
+value = 10.0
+min_value = 0.0
+type = 2
+use_point = true
+point_per_val = 1
+metadata/_custom_type_script = "uid://dgopjxmdwd2pi"
+
+[sub_resource type="Resource" id="Resource_5xrss"]
+Resource = null
+resource_path = "res://component/enemy/enemy.tscn::Resource_5xrss"
+resource_name = "penetration"
+resource_scene_unique_id = "Resource_5xrss"
+script = ExtResource("5_fyd7c")
+id = 3
+name = "penetration"
+value = 0.0
+min_value = 0.0
+type = 2
+use_point = true
+point_per_val = 10
+metadata/_custom_type_script = "uid://dgopjxmdwd2pi"
+
+[sub_resource type="Resource" id="Resource_5qqlh"]
+Resource = null
+resource_path = "res://component/enemy/enemy.tscn::Resource_5qqlh"
+resource_name = "bullet_speed"
+resource_scene_unique_id = "Resource_5qqlh"
+script = ExtResource("5_fyd7c")
+id = 4
+name = "bullet_speed"
+value = 50.0
+min_value = 0.0
+type = 2
+use_point = true
+point_per_val = 1
+metadata/_custom_type_script = "uid://dgopjxmdwd2pi"
+
+[sub_resource type="Resource" id="Resource_gvupl"]
+Resource = null
+resource_path = "res://component/enemy/enemy.tscn::Resource_gvupl"
+resource_name = "fire_rate"
+resource_scene_unique_id = "Resource_gvupl"
+script = ExtResource("5_fyd7c")
+id = 5
+name = "fire_rate"
+value = 3.0
+min_value = 0.0
+type = 3
+use_point = false
+point_per_val = 1
+metadata/_custom_type_script = "uid://dgopjxmdwd2pi"
+
+[sub_resource type="Resource" id="Resource_ehvju"]
+Resource = null
+resource_path = "res://component/enemy/enemy.tscn::Resource_ehvju"
+resource_name = "life_time"
+resource_scene_unique_id = "Resource_ehvju"
+script = ExtResource("5_fyd7c")
+id = 6
+name = "life_time"
+value = 1.0
+min_value = 0.0
+type = 3
+use_point = false
+point_per_val = 1
+metadata/_custom_type_script = "uid://dgopjxmdwd2pi"
+
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("texture", "bullet")]
+collision_layer = 2
+collision_mask = 13
+script = ExtResource("1_vs7h8")
+id = 1
+base_score = 10
+texture = NodePath("Texture")
+bullet = NodePath("machinegun")
+character_type = 2
+bullet_layer = 16
+bullet_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4gyqm")
+
+[node name="Texture" type="AnimatedSprite2D" parent="."]
+self_modulate = Color(1, 0, 0, 1)
+sprite_frames = SubResource("SpriteFrames_wujgv")
+frame_progress = 0.892931
+
+[node name="machinegun" parent="." instance=ExtResource("4_t304t")]
+process_mode = 4
+visible = false
+collision_layer = 16
+collision_mask = 5
+parameters = Array[ExtResource("5_fyd7c")]([SubResource("Resource_yxs7v"), SubResource("Resource_b2ui8"), SubResource("Resource_5imay"), SubResource("Resource_5xrss"), SubResource("Resource_5qqlh"), SubResource("Resource_gvupl"), SubResource("Resource_ehvju")])

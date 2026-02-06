@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://6mxd3iqjofo0"]
+
+[ext_resource type="Theme" uid="uid://cmlqn8ualvshh" path="res://resource/theme/damage_font.tres" id="1_rah3l"]
+[ext_resource type="Script" uid="uid://b4ip8o3l3qokt" path="res://script/damage_label.gd" id="2_b2es3"]
+
+[node name="DamageLabel" type="RichTextLabel"]
+clip_contents = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -480.0
+offset_top = -270.0
+offset_right = -380.0
+offset_bottom = -211.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_rah3l")
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+bbcode_enabled = true
+text = "[color=red]999[/color]"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_b2es3")

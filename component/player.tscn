@@ -1,0 +1,154 @@
+[gd_scene load_steps=14 format=3 uid="uid://cytrdovuf5srs"]
+
+[ext_resource type="Script" uid="uid://bi8vma3rww7fu" path="res://script/player.gd" id="1_onrkg"]
+[ext_resource type="PackedScene" uid="uid://d3sse6ayqeywm" path="res://component/bullet/player/machinegun.tscn" id="2_hqtel"]
+[ext_resource type="Texture2D" uid="uid://h6mqo4ognvvq" path="res://icon.svg" id="2_i3pqv"]
+[ext_resource type="Script" uid="uid://dgopjxmdwd2pi" path="res://script/bullet/bullet_parameter.gd" id="4_sweqy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hqtel"]
+size = Vector2(128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hqtel"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_i3pqv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_s3n37"]
+Resource = null
+resource_path = "res://component/player.tscn::Resource_s3n37"
+resource_name = "hp"
+resource_scene_unique_id = "Resource_s3n37"
+script = ExtResource("4_sweqy")
+id = 0
+name = "hp"
+value = 50.0
+min_value = 0.0
+type = 2
+use_point = true
+point_per_val = 1
+metadata/_custom_type_script = "uid://dgopjxmdwd2pi"
+
+[sub_resource type="Resource" id="Resource_mkk5b"]
+Resource = null
+resource_path = "res://component/player.tscn::Resource_mkk5b"
+resource_name = "damage"
+resource_scene_unique_id = "Resource_mkk5b"
+script = ExtResource("4_sweqy")
+id = 1
+name = "damage"
+value = 10.0
+min_value = 0.0
+type = 2
+use_point = true
+point_per_val = 1
+metadata/_custom_type_script = "uid://dgopjxmdwd2pi"
+
+[sub_resource type="Resource" id="Resource_xkox8"]
+Resource = null
+resource_path = "res://component/player.tscn::Resource_xkox8"
+resource_name = "move_speed"
+resource_scene_unique_id = "Resource_xkox8"
+script = ExtResource("4_sweqy")
+id = 2
+name = "move_speed"
+value = 10.0
+min_value = 0.0
+type = 2
+use_point = true
+point_per_val = 1
+metadata/_custom_type_script = "uid://dgopjxmdwd2pi"
+
+[sub_resource type="Resource" id="Resource_rd3i4"]
+Resource = null
+resource_path = "res://component/player.tscn::Resource_rd3i4"
+resource_name = "penetration"
+resource_scene_unique_id = "Resource_rd3i4"
+script = ExtResource("4_sweqy")
+id = 3
+name = "penetration"
+value = 2.0
+min_value = 0.0
+type = 2
+use_point = true
+point_per_val = 10
+metadata/_custom_type_script = "uid://dgopjxmdwd2pi"
+
+[sub_resource type="Resource" id="Resource_eycpt"]
+Resource = null
+resource_path = "res://component/player.tscn::Resource_eycpt"
+resource_name = "bullet_speed"
+resource_scene_unique_id = "Resource_eycpt"
+script = ExtResource("4_sweqy")
+id = 4
+name = "bullet_speed"
+value = 10.0
+min_value = 0.0
+type = 2
+use_point = true
+point_per_val = 1
+metadata/_custom_type_script = "uid://dgopjxmdwd2pi"
+
+[sub_resource type="Resource" id="Resource_b2nkv"]
+Resource = null
+resource_path = "res://component/player.tscn::Resource_b2nkv"
+resource_name = "fire_rate"
+resource_scene_unique_id = "Resource_b2nkv"
+script = ExtResource("4_sweqy")
+id = 5
+name = "fire_rate"
+value = 0.5
+min_value = 0.0
+type = 3
+use_point = false
+point_per_val = 1
+metadata/_custom_type_script = "uid://dgopjxmdwd2pi"
+
+[sub_resource type="Resource" id="Resource_4u8xj"]
+Resource = null
+resource_path = "res://component/player.tscn::Resource_4u8xj"
+resource_name = "life_time"
+resource_scene_unique_id = "Resource_4u8xj"
+script = ExtResource("4_sweqy")
+id = 6
+name = "life_time"
+value = 100.0
+min_value = 0.0
+type = 3
+use_point = false
+point_per_val = 1
+metadata/_custom_type_script = "uid://dgopjxmdwd2pi"
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("texture", "bullet")]
+scale = Vector2(0.5, 0.5)
+collision_mask = 23
+script = ExtResource("1_onrkg")
+texture = NodePath("Texture")
+bullet = NodePath("machinegun")
+character_type = 1
+bullet_layer = 8
+bullet_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hqtel")
+
+[node name="Texture" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_hqtel")
+frame_progress = 0.747565
+
+[node name="machinegun" parent="." instance=ExtResource("2_hqtel")]
+process_mode = 4
+visible = false
+bullet_color = Color(0.627451, 0, 1, 1)
+parameters = Array[ExtResource("4_sweqy")]([SubResource("Resource_s3n37"), SubResource("Resource_mkk5b"), SubResource("Resource_xkox8"), SubResource("Resource_rd3i4"), SubResource("Resource_eycpt"), SubResource("Resource_b2nkv"), SubResource("Resource_4u8xj")])
+
+[node name="Color" parent="machinegun" index="1"]
+modulate = Color(0.627451, 0, 1, 1)
+frame_progress = 0.473239
+
+[editable path="machinegun"]

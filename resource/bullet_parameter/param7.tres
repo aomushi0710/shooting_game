@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="BulletParameter" load_steps=2 format=3 uid="uid://bo2f56pqllmuw"]
+
+[ext_resource type="Script" uid="uid://dgopjxmdwd2pi" path="res://script/bullet/bullet_parameter.gd" id="1_604gi"]
+
+[resource]
+Resource = null
+resource_path = "res://bullet_parameter/param7.tres"
+resource_name = "life_time"
+resource_scene_unique_id = ""
+script = ExtResource("1_604gi")
+id = 6
+name = "life_time"
+value = 1.0
+min_value = 0.0
+type = 3
+use_point = false
+point_per_val = 1
+metadata/_custom_type_script = "uid://dgopjxmdwd2pi"

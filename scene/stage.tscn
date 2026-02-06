@@ -1,0 +1,115 @@
+[gd_scene load_steps=15 format=3 uid="uid://drsktcmugrlg"]
+
+[ext_resource type="Script" uid="uid://cebktu8waj73s" path="res://script/stage.gd" id="1_vd2nq"]
+[ext_resource type="Script" uid="uid://y0ttg24ghwm0" path="res://script/stage_data.gd" id="2_d06db"]
+[ext_resource type="Script" uid="uid://bps4f8b5sbfhm" path="res://script/spawn_data.gd" id="3_hl4d5"]
+[ext_resource type="PackedScene" uid="uid://byhlge6g4u1yx" path="res://component/enemy/enemy.tscn" id="4_vw327"]
+[ext_resource type="Curve2D" uid="uid://7b088e7agwfs" path="res://resource/curve2d/straight.tres" id="5_0yw53"]
+[ext_resource type="Theme" uid="uid://cmlqn8ualvshh" path="res://resource/theme/damage_font.tres" id="6_nsugm"]
+[ext_resource type="Script" uid="uid://b44jbeg47nkdq" path="res://script/stage_hud.gd" id="7_xqeq6"]
+[ext_resource type="Texture2D" uid="uid://bd3ux3mbvsdu2" path="res://asset/img/UI/bar_empty.PNG" id="8_c01ja"]
+[ext_resource type="Texture2D" uid="uid://btfu52881hmgc" path="res://asset/img/UI/bar_hp.PNG" id="9_y2p2m"]
+[ext_resource type="PackedScene" uid="uid://cytrdovuf5srs" path="res://component/player.tscn" id="10_8vg8g"]
+
+[sub_resource type="Resource" id="Resource_g8oy1"]
+script = ExtResource("3_hl4d5")
+time = 0.0
+enemy = ExtResource("4_vw327")
+path = ExtResource("5_0yw53")
+path_scale = Vector2(1, 1)
+duration = 3.0
+spawn_position = Vector2(0, 0)
+spawn_direction = 1
+despawn_position = Vector2(0, 0)
+despawn_direction = 2
+metadata/_custom_type_script = "uid://bps4f8b5sbfhm"
+
+[sub_resource type="Resource" id="Resource_1edn8"]
+script = ExtResource("3_hl4d5")
+time = 5.0
+enemy = ExtResource("4_vw327")
+path = ExtResource("5_0yw53")
+path_scale = Vector2(1, 1)
+duration = 100.0
+spawn_position = Vector2(0, 0)
+spawn_direction = 1
+despawn_position = Vector2(0, 0)
+despawn_direction = 2
+metadata/_custom_type_script = "uid://bps4f8b5sbfhm"
+
+[sub_resource type="Resource" id="Resource_vsjsl"]
+script = ExtResource("2_d06db")
+name = ""
+spawn_data = Array[ExtResource("3_hl4d5")]([SubResource("Resource_g8oy1"), SubResource("Resource_1edn8")])
+metadata/_custom_type_script = "uid://y0ttg24ghwm0"
+
+[sub_resource type="Theme" id="Theme_g8oy1"]
+default_font_size = 43
+
+[node name="Stage" type="Node2D" node_paths=PackedStringArray("player_node", "enemies_node", "bullets_node", "hud_node")]
+script = ExtResource("1_vd2nq")
+stage_data = SubResource("Resource_vsjsl")
+player_node = NodePath("Player")
+enemies_node = NodePath("Enemies")
+bullets_node = NodePath("Bullets")
+hud_node = NodePath("CanvasLayer/HUD")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("stage_node", "hp_bar_node", "hp_text_node", "score_node")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("6_nsugm")
+script = ExtResource("7_xqeq6")
+stage_node = NodePath("../..")
+hp_bar_node = NodePath("HPBar")
+hp_text_node = NodePath("HPBar/HPText")
+score_node = NodePath("Score")
+
+[node name="HPBar" type="TextureProgressBar" parent="CanvasLayer/HUD"]
+layout_mode = 0
+offset_right = 458.0
+offset_bottom = 39.0
+scale = Vector2(2, 1)
+value = 100.0
+texture_under = ExtResource("8_c01ja")
+texture_progress = ExtResource("9_y2p2m")
+texture_progress_offset = Vector2(8, 8)
+
+[node name="HPText" type="RichTextLabel" parent="CanvasLayer/HUD/HPBar"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 5.0
+offset_right = 335.0
+offset_bottom = 50.0
+scale = Vector2(0.5, 1)
+theme = SubResource("Theme_g8oy1")
+bbcode_enabled = true
+text = "HP 999/999"
+vertical_alignment = 1
+
+[node name="Score" type="RichTextLabel" parent="CanvasLayer/HUD"]
+layout_mode = 0
+offset_left = 468.0
+offset_top = 2.0
+offset_right = 861.0
+offset_bottom = 56.0
+bbcode_enabled = true
+text = "SCORE:000000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Player" parent="." instance=ExtResource("10_8vg8g")]
+position = Vector2(0, 270)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(480, 270)
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Bullets" type="Node2D" parent="."]
+
+[connection signal="value_changed" from="CanvasLayer/HUD/HPBar" to="CanvasLayer/HUD" method="_on_hp_bar_value_changed"]
+[connection signal="damaged" from="Player" to="CanvasLayer/HUD" method="_on_player_damaged"]

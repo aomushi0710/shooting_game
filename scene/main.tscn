@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://c02rto04vmu1k"]
+
+[ext_resource type="Script" uid="uid://dy113mft5vqxj" path="res://script/main_scene.gd" id="1_v0l8b"]
+[ext_resource type="FontFile" uid="uid://c86gnlxtrv8md" path="res://asset/font/DotGothic16-Regular.ttf" id="2_wp4xf"]
+[ext_resource type="Script" uid="uid://cf8biuu70cjrd" path="res://script/main_scene_enemies.gd" id="3_wp4xf"]
+
+[sub_resource type="Theme" id="Theme_0xm2m"]
+default_font_size = 50
+
+[sub_resource type="Theme" id="Theme_ig7tw"]
+default_font_size = 80
+
+[sub_resource type="Theme" id="Theme_h2yge"]
+default_font_size = 30
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_0xm2m")
+script = ExtResource("1_v0l8b")
+
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 276.0
+offset_top = 200.0
+offset_right = 684.0
+offset_bottom = 281.0
+text = "ステージセレクト"
+
+[node name="Title" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_right = 960.0
+offset_bottom = 150.0
+theme = SubResource("Theme_ig7tw")
+theme_override_fonts/bold_italics_font = ExtResource("2_wp4xf")
+bbcode_enabled = true
+text = "[b]シューティングゲーム[/b]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Credit" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_top = 490.0
+offset_right = 960.0
+offset_bottom = 540.0
+theme = SubResource("Theme_h2yge")
+text = "© 2026 aomushi0710"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Enemies" type="Node2D" parent="."]
+script = ExtResource("3_wp4xf")
+
+[connection signal="button_up" from="Control/Button" to="Control" method="_on_button_button_up"]
