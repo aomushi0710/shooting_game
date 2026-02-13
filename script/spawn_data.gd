@@ -26,6 +26,9 @@ enum Direction {
 ## 補正に失敗した場合は元の値が渡されます。
 @export var spawn_position: Vector2:
 	get:
+		if Engine.is_editor_hint():
+			return spawn_position
+		
 		if enemy:
 			var instance := enemy.instantiate()
 			
@@ -47,6 +50,9 @@ enum Direction {
 ## 補正に失敗した場合は元の値が渡されます。
 @export var despawn_position: Vector2:
 	get:
+		if Engine.is_editor_hint():
+			return spawn_position
+		
 		if enemy:
 			var instance := enemy.instantiate()
 			

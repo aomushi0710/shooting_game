@@ -5,7 +5,7 @@ func _ready() -> void:
 	
 	while true:
 		_spawn_enemy()
-		await get_tree().create_timer(5).timeout
+		await get_tree().create_timer(randf_range(0.5, 5.0)).timeout
 
 ## タイトル画面にランダムな種類の敵を出現させ、泳がせる関数
 func _spawn_enemy() -> void:
@@ -26,7 +26,7 @@ func _spawn_enemy() -> void:
 	
 	enemy.position = spawn_pos
 	enemy.can_shoot = false
-	enemy.scale.x *= signf(spawn_pos.x - despawn_pos.x)
+	enemy.scale.x *= signf(spawn_pos.x - despawn_pos.x) # 座標に応じて向きを反転
 	add_child(enemy)
 	
 	var tween: Tween = self.create_tween()

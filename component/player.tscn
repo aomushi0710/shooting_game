@@ -27,7 +27,7 @@ resource_scene_unique_id = "Resource_s3n37"
 script = ExtResource("4_sweqy")
 id = 0
 name = "hp"
-value = 50.0
+value = 30.0
 min_value = 0.0
 type = 2
 use_point = true
@@ -42,7 +42,7 @@ resource_scene_unique_id = "Resource_mkk5b"
 script = ExtResource("4_sweqy")
 id = 1
 name = "damage"
-value = 10.0
+value = 30.0
 min_value = 0.0
 type = 2
 use_point = true
@@ -102,7 +102,7 @@ resource_scene_unique_id = "Resource_b2nkv"
 script = ExtResource("4_sweqy")
 id = 5
 name = "fire_rate"
-value = 0.5
+value = 1.0
 min_value = 0.0
 type = 3
 use_point = false
@@ -139,16 +139,14 @@ shape = SubResource("RectangleShape2D_hqtel")
 
 [node name="Texture" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_hqtel")
-frame_progress = 0.747565
+frame_progress = 0.205405
 
 [node name="machinegun" parent="." instance=ExtResource("2_hqtel")]
 process_mode = 4
 visible = false
-bullet_color = Color(0.627451, 0, 1, 1)
 parameters = Array[ExtResource("4_sweqy")]([SubResource("Resource_s3n37"), SubResource("Resource_mkk5b"), SubResource("Resource_xkox8"), SubResource("Resource_rd3i4"), SubResource("Resource_eycpt"), SubResource("Resource_b2nkv"), SubResource("Resource_4u8xj")])
 
 [node name="Color" parent="machinegun" index="1"]
-modulate = Color(0.627451, 0, 1, 1)
 frame_progress = 0.473239
 
 [editable path="machinegun"]
